@@ -17,7 +17,6 @@ export async function GET(request) {
 }
 export async function POST(request) {
     const body = await request.json();
-    console.log(body);
     const uri = "mongodb+srv://sun123:GO2lP8LIib7ikTDD@cluster0.d6kqifn.mongodb.net/";
     const client = new MongoClient(uri);
     try {
