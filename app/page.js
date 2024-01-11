@@ -48,6 +48,7 @@ export default function Home() {
       console.log('Error', error);
     }
 
+
   }
   const handleChange = async (e) => {
     setproductform({ ...productform, [e.target.name]: e.target.value })
@@ -59,7 +60,6 @@ export default function Home() {
     setfilereredProduct(filtered);
   }, [searchProduct, product])
 
-  // console.log(filereredProduct);
 
 
 
@@ -71,30 +71,23 @@ export default function Home() {
       <div className="mt-4 flex items-center justify-center">
         <input
           type="text"
-          placeholder='Search the product..'
+          placeholder='Search a product..'
           value={searchProduct}
           onChange={(e) => setSearchProduct(e.target.value)}
           className=" border w-[60%] rounded-xl border-gray-300 px-4 py-2 ml-5 "
         />
-        {/* <select
-
-          className="border rounded px-2 py-1 mb-2 ml-2"
-        >
-          <option value="all">All</option>
-          <option value="name">Name</option>
-          <option value="quantity">Quantity</option>
-          <option value="price">Price</option>
-        </select> */}
-
 
       </div>
 
-      {searchProduct.length > 0 ?
-        <div className='w-[60%] border border-gray-300 ml-40 mt-2 rounded-xl p-1'>
-          <Dropdown props={filereredProduct} />
+      {searchProduct.length > 0 && (
+        <div className='w-[60%] ml-40 mt-2 rounded-xl p-1 '>
+          {filereredProduct.map((product) => (
+            <Dropdown key={product.id} props={product} />
+
+          ))}
         </div>
-        : <></>
-      }
+      )}
+
 
       <div className='container mt-4'>
         <h1 className='ml-2 font-bold'>Add a Product</h1>
@@ -106,6 +99,7 @@ export default function Home() {
               value={productform?.slug || ""}
               name='slug'
               onChange={handleChange}
+              autoComplete='off'
               className="border w-[90%] rounded-xl border-gray-300 px-4 py-2 ml-5"
             />
           </div>
@@ -117,6 +111,7 @@ export default function Home() {
               value={productform?.quantity || ""}
               name='quantity'
               onChange={handleChange}
+              autoComplete='off'
               className="border w-[90%] rounded-xl border-gray-300 px-4 py-2 ml-5"
             />
           </div>
@@ -128,6 +123,7 @@ export default function Home() {
               value={productform?.price || ""}
               name='price'
               onChange={handleChange}
+              autoComplete='off'
               className="border w-[90%] rounded-xl border-gray-300 px-4 py-2 ml-5"
             />
           </div>
@@ -143,17 +139,19 @@ export default function Home() {
 
       </div>
 
-      {product.length > 0 ? (
-        <div className='flex flex-wrap'>
-          {product.map((item, index) => (
-            <div key={index}>
-              <ProductCard props={item} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No products available</p>
-      )}
+      {
+        product.length > 0 ? (
+          <div className='flex flex-wrap'>
+            {product.map((item, index) => (
+              <div key={index}>
+                <ProductCard props={item} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No products available</p>
+        )
+      }
 
     </>
   )

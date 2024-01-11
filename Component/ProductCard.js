@@ -1,8 +1,27 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faCircleMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ProductCard = ({ props }) => {
+
+    const buttonAction = async (action) => {
+        try {
+            const response = await fetch('/api/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action, slug: props.slug, initialQuantity: props.quantity })
+            });
+
+            if (response.ok) {
+                console.log("Action successful");
+            } else {
+                console.error('Error in button action');
+            }
+        } catch (error) {
+            console.error('Error', error);
+        }
+    };
+
     return (
         <div className="text-gray-600 body-font flex justify-center items-center ">
             <div className="container px-4 py-2 mx-auto ">
@@ -18,8 +37,12 @@ const ProductCard = ({ props }) => {
                                     <p className="leading-relaxed text-sm">Quantity:{props.quantity}</p>
                                 </div>
                                 <div>
-                                    <button><FontAwesomeIcon icon={faCirclePlus} /></button>
-                                    <button><FontAwesomeIcon icon={faTrash} /></button>
+                                    <div className='flex items-center justify-between gap-2'>
+
+                                        <button onClick={() => buttonAction("add", props.slug, props.quantity)} ><FontAwesomeIcon icon={faCirclePlus} /></button>
+                                        <button onClick={() => buttonAction("sub", props.slug, props.quantity)}><FontAwesomeIcon icon={faCircleMinus} /></button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

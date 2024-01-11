@@ -13,12 +13,6 @@ const Header = () => {
                         alt="Picture of the author" />
                     <span className="ml-3 text-sm">Stock Management App</span>
                 </a>
-                <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                    <a className="mr-5 hover:text-white">First Link</a>
-                    <a className="mr-5 hover:text-white">Second Link</a>
-                    <a className="mr-5 hover:text-white">Third Link</a>
-
-                </nav>
 
             </div>
         </header>
