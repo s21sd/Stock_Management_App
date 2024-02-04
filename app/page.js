@@ -60,40 +60,41 @@ export default function Home() {
     setfilereredProduct(filtered);
   }, [searchProduct, product])
 
-
-
-
   return (
     <>
 
       <Header />
       <ToastContainer />
-      <div className="mt-4 flex items-center justify-center">
+      <div className="mt-14 flex items-center justify-center">
         <input
           type="text"
           placeholder='Search a product..'
           value={searchProduct}
           onChange={(e) => setSearchProduct(e.target.value)}
-          className=" border w-[60%] rounded-xl border-gray-300 px-4 py-2 ml-5 "
+          className=" border w-[60%] rounded-xl border-gray-300 px-6 py-4 ml-5 "
         />
 
       </div>
 
-      {searchProduct.length > 0 && (
-        <div className='w-[60%] ml-40 mt-2 rounded-xl p-1 '>
-          {filereredProduct.map((product) => (
-            <Dropdown key={product.id} props={product} />
+      {
+        searchProduct.length > 0 && (
+          <div key={searchProduct.length} className='w-[60%] ml-[21%] mt-2 rounded-xl p-1 '>
+            {
+              filereredProduct.map((product) => (
+                <Dropdown key={product.id} props={product} />
 
-          ))}
-        </div>
-      )}
+              ))
+            }
+          </div>
+        )
+      }
 
 
-      <div className='container mt-4'>
-        <h1 className='ml-2 font-bold'>Add a Product</h1>
+      <div className='container m-14 '>
+        <h1 className='ml-2 font-bold text-2xl'>Add a Product</h1>
         <form className='mt-4' id='form' name='forme'>
           <div>
-            <label className=" ml-3 block mb-2 font-semibold">Product Name:</label>
+            <label className=" ml-3 block mb-2 font-semibold text-2xl">Product Name:</label>
             <input
               type="text"
               value={productform?.slug || ""}
@@ -105,7 +106,7 @@ export default function Home() {
           </div>
 
           <div>
-            <label className="ml-3 block mb-2 font-semibold">Quantity:</label>
+            <label className="ml-3 block mb-2 font-semibold text-2xl">Quantity:</label>
             <input
               type="number"
               value={productform?.quantity || ""}
@@ -117,7 +118,7 @@ export default function Home() {
           </div>
 
           <div>
-            <label className="ml-3 block mb-2 font-semibold ">Price:</label>
+            <label className="ml-3 block mb-2 font-semibold text-2xl ">Price:</label>
             <input
               type="text"
               value={productform?.price || ""}
@@ -134,14 +135,14 @@ export default function Home() {
 
         </form>
 
-        <h1 className='ml-2 font-bold mt-5'>Display Current Stock</h1>
+        <h1 className='ml-2 font-bold text-2xl mt-5'>Display Current Stock</h1>
 
 
       </div>
 
       {
         product.length > 0 ? (
-          <div className='flex flex-wrap'>
+          <div className='flex flex-wrap m-5'>
             {product.map((item, index) => (
               <div key={index}>
                 <ProductCard props={item} />
